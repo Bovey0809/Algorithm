@@ -17,15 +17,15 @@ def bsuccessors(state):
                       there | frozenset([a, b, 'light']),
                       t + max(a, b)),
                      (a, b, '->'))
-                    for a in here if a != 'light'
-                    for b in here if b != 'light')
+                    for a in here if a is not 'light'
+                    for b in here if b is not 'light')
     else:
         return dict(((here | frozenset([a, b, 'light']),
                       there - frozenset([a, b, 'light']),
                       t + max(a, b)),
                      (a, b, '<-'))
-                    for a in there if a != 'light'
-                    for b in there if b != 'light')
+                    for a in there if a is not 'light'
+                    for b in there if b is not 'light')
 
 
 def elapsed_time(path):
@@ -44,17 +44,21 @@ def bridge_problem(here):
     if not here:
         return frontier[0]
     while frontier:
+        frontier.sort(key=elapsed_time)
         path = frontier.pop(0)
+        if not path[-1][0]:
+            return path
         for (state, action) in bsuccessors(path[-1]).items():
             if state not in explored:
                 here, there, t = state
                 explored.add(state)
                 path2 = path + [action, state]
+                # if not here:  ## That is, nobody left here
+                #     return path2
+                # else:
+                #     frontier.append(path2)
+                #     frontier.sort(key=elapsed_time)
                 frontier.append(path2)
-
-        frontier.sort(key=elapsed_time)
-        if not frontier[0][0]:
-            return frontier[-1]
     return []
 
 
