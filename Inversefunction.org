@@ -1,0 +1,60 @@
+* Inverse Function
+** DONE Input and output of Inverse Function
+   CLOSED: [2019-04-16 Tue 15:41]
+   :LOGBOOK:
+   - State "DONE"       from "TODO"       [2019-04-16 Tue 15:41]
+   :END:
+   - input: function x, f(x)
+   - output: f'(y), y = f(x)
+*** DONE Example
+    CLOSED: [2019-04-16 Tue 15:48]
+    :LOGBOOK:
+    - State "DONE"       from "NEXT"       [2019-04-16 Tue 15:48]
+    :END:
+   - inverse(f) -> y
+   - y(x) -> m where f(m) == x
+*** DONE Figure out the slow_inverse
+    CLOSED: [2019-04-16 Tue 16:22]
+    :LOGBOOK:
+    - State "DONE"       from "NEXT"       [2019-04-16 Tue 16:22]
+    :END:
+    #+BEGIN_SRC python :results output
+      def slow_inverse(f, delta=1/128):
+          def _f(y):
+              x = 0
+              while f(x) < y:
+                  x += delta
+              return x if (f(x) - y < y-f(x-delta)) else x-delta
+          return _f
+
+      def square(x): return x*x
+      sqrt = slow_inverse(square)
+      print(sqrt(100))
+    #+END_SRC
+
+    #+RESULTS:
+    : 10.0
+**** DONE Explain the code
+     CLOSED: [2019-04-16 Tue 16:22]
+     :LOGBOOK:
+     - State "DONE"       from "NEXT"       [2019-04-16 Tue 16:22]
+     :END:
+     - Idea: find the value as the input of f(m), from 0 to whatever.
+     - Everystep, the value will add a number of delta.
+     - Calculate the y = f(x+delta) and compare the y and m, if the diff(y, m) < delta
+     - Return x + delta
+** TODO Write a more efficient algorithm to calculate the inverse function.
+*** TODO How to use newton method or binary search
+**** TODO Binary search combined with inverse function
+     #+BEGIN_SRC python
+       def inverse(f, delta=1/128):
+           def _f(y):
+               left = 0
+               right = y
+               middle = right / 2
+               while abs(f(middle) - y) > delta:
+
+       square = lambda x: x*x
+       sqrt = inverse(square)
+       assert inverse(sqrt(100)) == 10
+     #+END_SRC
