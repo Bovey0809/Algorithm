@@ -67,11 +67,44 @@
 # @lc code=start
 class Solution:
     def reverseWords(self, s: str) -> str:
+        # Using stack, FILO
+        # while push, detect whether it is a word.
+        if len(s) < 1:
+            return s
+        
         length = len(s)
-        for index, word in enumerate(s):
-            print(s[length - index-1])
+        words = []
+        i = 0
+        while i < length:
+            if s[i] is not ' ':
+                start = i
+                while i < length and s[i] is not ' ':
+                    i += 1
+                words.append(s[start:i])
+            i += 1
         
+        # reverse
+        last = len(words) - 1
+        first = 0
+        while last > first:
+            words[last], words[first] = words[first], words[last]
+            first += 1
+            last -= 1
         
+        # join
+        word_length = len(words)
+        if word_length == 0:
+            return ""
+            
+        result = words[0]
+        i = 1
+        while i < word_length:
+            result += ' '
+            result += words[i]
+            i += 1
+        return result
+
 # @lc code=end
 my = Solution()
-my.reverseWords("the sky is blue")
+# my.reverseWords("the sky is blue")
+print(my.reverseWords(" "))
