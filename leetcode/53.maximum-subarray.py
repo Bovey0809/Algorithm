@@ -3,7 +3,8 @@
 #
 # [53] Maximum Subarray
 #
-# https://leetcode.com/problems/maximum-subarray/description/
+# ht
+# tps://leetcode.com/problems/maximum-subarray/description/
 #
 # algorithms
 # Easy (44.77%)
@@ -37,16 +38,15 @@
 class Solution:
     def maxSubArray(self, nums) -> int:
         # brute force O(n^2)
-        length = len(nums)
-        if length<=1:
-            return nums[0]
-        max_sum = nums[0]
-        for index, num in enumerate(nums):
-            for j in range(index, length):
-                max_sum = max(max_sum, sum(nums[index: j+1]))
-        return max_sum
-
+        # Kadane's algorithm
+        # local minimun is the max value between the num and the last local minimum
+        global_max = local_max = nums[1]
+        for num in nums[1:]:
+            local_max = max(local_max+num, num)
+            global_max = max(local_max, global_max)
+        return global_max
+        
 
 # @lc code=end
 my = Solution()
-print(my.maxSubArray([-2, 1]))
+print(my.maxSubArray([1, 2, 3]))
