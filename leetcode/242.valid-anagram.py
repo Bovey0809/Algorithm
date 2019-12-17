@@ -38,21 +38,18 @@
 # solution to such case?
 # 
 #
-
+# %%
 # @lc code=start
 from collections import Counter
 class Solution:
     def isAnagram(self, s: str, t: str) -> bool:
         if len(s) != len(t):
             return False
-        c = Counter(s)
-        for letter in t:
-            # if letter not in c:
-            #     return False
-            c[letter] -=1
-            if c[letter] < 0:
+        counter = Counter(s)
+        for char in t:
+            if char in counter and counter[char] > 0:
+                counter[char] -= 1
+            else:
                 return False
         return True
-
 # @lc code=end
-

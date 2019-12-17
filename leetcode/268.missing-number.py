@@ -36,13 +36,12 @@
 #
 
 # @lc code=start
-import collections
+# %%
 class Solution:
     def missingNumber(self, nums) -> int:
-        length = len(nums)
-        total = length * (length+1) / 2
-        return int(total - sum(nums))
-        
+        return sum(range(len(nums)+1)) - sum(nums)
 # @lc code=end
 my = Solution()
-print(my.missingNumber([0]))
+my.missingNumber([3, 0, 1])
+
+# %%

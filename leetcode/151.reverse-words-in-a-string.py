@@ -81,6 +81,7 @@ class Solution:
                 while i < length and s[i] is not ' ':
                     i += 1
                 words.append(s[start:i])
+
             i += 1
         
         # reverse
@@ -108,3 +109,4 @@ class Solution:
 my = Solution()
 # my.reverseWords("the sky is blue")
 print(my.reverseWords(" "))
+

@@ -58,8 +58,8 @@
 #
 
 # @lc code=start
-
-import collections
+#%%
+from collections import Counter
 class Solution:
     def findPairs(self, nums, k: int) -> int:
         # We use set because the "in" operation of set is O(1).
@@ -80,10 +80,23 @@ class Solution:
         #     if k!= 0 and num+k in counter or k==0 and counter[num] > 1:
         #         result += 1
         # use Karnaugh map to optimize the logic
-        counter = collections.Counter(nums)
-        return sum(k==0 and counter[num] > 1 or k>0 and num + k in counter for num in counter)
         # return result
+        if k < 0:
+            return 0
 
+        c = Counter(nums)
+        result = 0
+        
+        for num in c:
+            if k!=0 and num + k in c or k==0 and c[num] > 1:
+                # 这里其实只需要考虑num+k,因为num-k的情况已经包括进去了
+                result += 1
+        return result
+
+            
 # @lc code=end
 my = Solution()
-print(my.findPairs([1, 3, 1, 5, 4], 1))
+print(my.findPairs([1, 3, 1, 5, 4], 1) == 2)
+
+
+# %%
