@@ -36,17 +36,17 @@
 #%%
 class Solution:
     def maxSubArray(self, nums) -> int:
-        cur_max = glo_max = nums[0]
+        glo_max = cur_max = nums[0]
         for num in nums[1:]:
-            cur_max = max(cur_max+num, num)
+            cur_max = max(num, cur_max+num)
             glo_max = max(cur_max, glo_max)
         return glo_max
-
+            
         
 
 # @lc code=end
 my = Solution()
 print(my.maxSubArray([1]))
 print(my.maxSubArray([-1]))
-
+print(my.maxSubArray([1, 2, 3 ]))
 # %%
