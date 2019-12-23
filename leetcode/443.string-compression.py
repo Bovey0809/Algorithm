@@ -108,7 +108,7 @@ class Solution:
                 # 1. calculate the length. 2. update the anchor
                 chars[write] = chars[anchor]
                 write += 1
-                if index > anchor:
+                if index - anchor > 0:
                     for digit in str(index - anchor + 1):
                         chars[write] = digit
                         write += 1
