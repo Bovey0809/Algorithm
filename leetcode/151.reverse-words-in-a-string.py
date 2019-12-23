@@ -67,18 +67,26 @@
 # @lc code=start
 class Solution:
     def reverseWords(self, s: str) -> str:
-        length = len(s)
-        end = 0
+        """Find the word in an iteration and reverse it.
+        
+        Args:
+            s: a sentence
+        
+        Returns:
+            return the reversed sentence.
+        """
+        # find the word
+        right = 0
         words = []
-        # 这个思想很巧妙, 利用end作为指针, 而不是start, 这样代码可以简洁很多.
-        while end < length:
-            if s[end] is not ' ':
-                start = end
-                while end < length and s[end] is not ' ':
-                    end += 1
-                words.append(s[start:end])
-            end += 1
+        while right < len(s):
+            if s[right] != " ":
+                left = right
+                while right < len(s) and s[right] != " ":
+                    right += 1
+                words.append(s[left:right])
+            right += 1
         return ' '.join(reversed(words))
+
 # @lc code=end
 my = Solution()
 print(my.reverseWords(" "))

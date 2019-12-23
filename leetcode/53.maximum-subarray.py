@@ -33,20 +33,29 @@
 
 # @lc code=start
 
-#%%
+# %%
+
+
 class Solution:
     def maxSubArray(self, nums) -> int:
-        glo_max = cur_max = nums[0]
+        """Maximum of the subarray.
+
+        Args:
+            nums: list of numbers
+
+        Returns:
+            return the max(subarray
+        """
+        global_max = local_max = nums[0]
         for num in nums[1:]:
-            cur_max = max(num, cur_max+num)
-            glo_max = max(cur_max, glo_max)
-        return glo_max
-            
-        
+            local_max = max(num, local_max+num)
+            global_max = max(local_max, global_max)
+        return global_max
 
 # @lc code=end
 my = Solution()
 print(my.maxSubArray([1]))
 print(my.maxSubArray([-1]))
-print(my.maxSubArray([1, 2, 3 ]))
+print(my.maxSubArray([1, 2, 3]))
+print(my.maxSubArray([-2, 1, -3, 4, -1, 2, 1, -5, 4]))
 # %%
