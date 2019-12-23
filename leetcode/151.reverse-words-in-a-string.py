@@ -76,8 +76,9 @@ class Solution:
                 start = end
                 while end < length and s[end] is not ' ':
                     end += 1
-                    words.append(s[start:end])
+                words.append(s[start:end])
             end += 1
+        return ' '.join(reversed(words))
 # @lc code=end
 my = Solution()
 print(my.reverseWords(" "))

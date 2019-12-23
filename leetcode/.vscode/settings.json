@@ -4,4 +4,7 @@
     "python.testing.unittestEnabled": false,
     "python.testing.nosetestsEnabled": false,
     "python.pythonPath": "/Users/Super/anaconda/bin/python",
+    "search.quickOpen.includeSymbols": true,
+    "editor.suggest.insertHighlight": true,
+    "editor.suggest.shareSuggestSelections": true,
 }

@@ -91,21 +91,35 @@
 
 #%%
 class Solution:
-    def compress(self, chars) -> int:
-        start = current = 0
-        while current < len(chars):
-            while current < len(chars) and chars[start] == chars[current]:
-                current += 1
-            start += 1
-            if current - start > 0:
-                chars[start:current] = str(current-start+1)
-                start += 1
-        return start
-
+    def compress(self, chars):
+        """Compress word.
+        
+        Args:
+            chars: list of characters
+        
+        Returns:
+            length of the compressed words.
+        """
+        anchor = 0 # from the begining of the chars
+        write = 0 # write points to the inplace chaning positon.
+        for index, char in enumerate(chars):
+            if index + 1 == len(chars) or char != chars[index + 1]:
+                # when the reading pointer to the different word.
+                # 1. calculate the length. 2. update the anchor
+                chars[write] = chars[anchor]
+                write += 1
+                if index > anchor:
+                    for digit in str(index - anchor + 1):
+                        chars[write] = digit
+                        write += 1
+                anchor = index + 1
+        return write
 # @lc code=end
 
 
 my = Solution()
+# print(my.compress([""]))
+print(my.compress(["a"]))
 print(my.compress(["a", "a", "b", "b", "c", "c", "c"]))
 print(my.compress(["a", "b", "b", "b", "b",
                    "b", "b", "b", "b", "b", "b", "b", "b"]))
