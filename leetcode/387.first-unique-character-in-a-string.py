@@ -47,12 +47,11 @@ class Solution:
             return the index of the first unique one.
         """
         c = Counter(s)
-        
-        for index, character in enumerate(s):
-            if c[character] == 1:
+        for index, char in enumerate(s):
+            if c[char] == 1:
                 return index
-        return -1
-        
+        return  -1
+                
         
 # @lc code=end
 

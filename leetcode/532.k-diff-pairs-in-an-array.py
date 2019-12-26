@@ -81,22 +81,12 @@ class Solution:
         #         result += 1
         # use Karnaugh map to optimize the logic
         # return result
-        if k < 0:
-            return 0
-
+        if k < 0: return 0
         c = Counter(nums)
-        result = 0
-        
-        for num in c:
-            if k!=0 and num + k in c or k==0 and c[num] > 1:
-                # 这里其实只需要考虑num+k,因为num-k的情况已经包括进去了
-                result += 1
-        return result
-
-            
+        return sum((k !=0 and num-k in c or k==0 and c[num] > 1 for num in c))
 # @lc code=end
 my = Solution()
-print(my.findPairs([1, 3, 1, 5, 4], 1) == 2)
-
+print(my.findPairs([1, 3, 1, 5, 4], 1))
+print(my.findPairs([1, 2, 1, 3, 4], 0))
 
 # %%

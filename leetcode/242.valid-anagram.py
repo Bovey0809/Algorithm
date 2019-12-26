@@ -43,13 +43,25 @@
 from collections import Counter
 class Solution:
     def isAnagram(self, s: str, t: str) -> bool:
-        if len(s) != len(t):
-            return False
-        counter = Counter(s)
+        """Detectect two strings are anagram.
+        
+        Args:
+            s: one string.
+            t: anthor string.
+        
+        Returns:
+            return boolean.
+        """
+        c = Counter(s)
         for char in t:
-            if char in counter and counter[char] > 0:
-                counter[char] -= 1
+            if char in c:
+                c[char] -= 1
             else:
                 return False
+        for char in c:
+            if c[char] != 0:
+                return False
         return True
+
+            
 # @lc code=end

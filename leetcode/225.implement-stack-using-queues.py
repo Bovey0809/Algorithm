@@ -45,8 +45,6 @@
 # operations will be called on an empty stack).
 #
 #
-#
-#%%
 # @lc code=start
 import collections
 from collections import deque
@@ -68,35 +66,42 @@ class MyStack:
         """
         self.queue1 = deque([])
         self.queue2 = deque([])
-        
+
     def push(self, x: int) -> None:
         """
         Push element x onto stack.
         """
         self.queue1.append(x)
         self.peak = x
-        
+
     def pop(self) -> int:
         """Pop the ele from queue1 using popleft.
-        
+
         Args:
             self.
-        
+
         Returns:
             the poped item
         """
+        length = len(self.queue1)
+        for _ in range(length-1):
+            self.peak = self.queue1.popleft()
+            self.queue2.append(self.peak)
+        result = self.queue1.popleft()
+        self.queue1 = self.queue2
+        return result
         
     def top(self) -> int:
         """
         Get the top element.
         """
         return self.peak
-    
+
     def empty(self) -> bool:
         """
         Returns whether the stack is empty.
         """
-        return len(self.stack) == 0
+        return len(self.queue1) == 0
 
 # Your MyStack object will be instantiated and called as such:
 # obj = MyStack()

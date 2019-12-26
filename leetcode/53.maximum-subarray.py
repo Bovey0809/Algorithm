@@ -46,12 +46,11 @@ class Solution:
         Returns:
             return the max(subarray
         """
-        global_max = local_max = nums[0]
+        global_max = cur_max = nums[0]
         for num in nums[1:]:
-            local_max = max(num, local_max+num)
-            global_max = max(local_max, global_max)
+            cur_max = max(cur_max+num, num)
+            global_max = max(cur_max, global_max)
         return global_max
-
 # @lc code=end
 my = Solution()
 print(my.maxSubArray([1]))

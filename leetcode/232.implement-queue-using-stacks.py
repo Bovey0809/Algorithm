@@ -61,7 +61,8 @@ class MyQueue:
         """
         Push element x to the back of queue.
         """
-        if not self.s1: self.front = x
+        if not self.s1:
+            self.front = x
         self.s1.append(x)
 
     def pop(self) -> int:
@@ -69,16 +70,18 @@ class MyQueue:
         Removes the element from in front of queue and returns that element.
         """
         if not self.s2:
+            # pool s1 to s2
             while self.s1:
                 self.s2.append(self.s1.pop())
-        return self.s2.pop()
-    
+        result = self.s2.pop()
+        if self.s2:
+            self.front = self.s2[-1]
+        return result
+
     def peek(self) -> int:
         """
         Get the front element.
         """
-        if self.s2:
-            return self.s2[-1]
         return self.front
         
 
@@ -86,7 +89,7 @@ class MyQueue:
         """
         Returns whether the queue is empty.
         """
-        return len(self.s1) + len(self.s2) == 0
+        return not self.s1 and not self.s2
 
 
 # Your MyQueue object will be instantiated and called as such:
