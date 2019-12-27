@@ -101,7 +101,7 @@ class MyStack:
         """
         Returns whether the stack is empty.
         """
-        return len(self.queue1) == 0
+        return not self.queue1
 
 # Your MyStack object will be instantiated and called as such:
 # obj = MyStack()
