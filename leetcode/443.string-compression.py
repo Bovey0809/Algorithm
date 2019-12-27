@@ -100,19 +100,16 @@ class Solution:
         Returns:
             length of the compressed words.
         """
-        anchor = 0 # from the begining of the chars
-        write = 0 # write points to the inplace chaning positon.
-        for index, char in enumerate(chars):
-            if index + 1 == len(chars) or char != chars[index + 1]:
-                # when the reading pointer to the different word.
-                # 1. calculate the length. 2. update the anchor
-                chars[write] = chars[anchor]
+        anchor = write = 0
+        for read, char in enumerate(chars):
+            if read+1 == len(chars) or chars[read+1] != char:
+                chars[write] = chars[read]
                 write += 1
-                if index - anchor > 0:
-                    for digit in str(index - anchor + 1):
+                if read > anchor:
+                    for digit in str(read-anchor+1):
                         chars[write] = digit
                         write += 1
-                anchor = index + 1
+                anchor = read + 1
         return write
 # @lc code=end
 
