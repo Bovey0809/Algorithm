@@ -86,7 +86,6 @@ class MyStack:
         length = len(self.queue1)
         for _ in range(length-1):
             self.peak = self.queue1.popleft()
-            self.queue2.append(self.peak)
         result = self.queue1.popleft()
         self.queue1 = self.queue2
         return result
@@ -95,6 +94,7 @@ class MyStack:
         """
         Get the top element.
         """
+        
         return self.peak
 
     def empty(self) -> bool:
