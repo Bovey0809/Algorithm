@@ -1,68 +1,65 @@
-public static void main(String[] args) {
-    int n = 5
-    int k = 10
-    int x = 100
-    int[] price = new int[] {30, 25, 50, 25, 50}
-    int[][] dp = new int[n * k][n]
-    for (int i=0
-         i < dp.length
-         i + +) {
-        for (int j=0
-             j < dp[0].length
-             j + +) {
-            dp[i][j] = -1
-        }
-    }
 
-    dp[0][0] = x
-    for (int i=1
-         i <= x / price[0]
-         i + +) {
-        dp[i][0] = dp[0][0] - i * price[0]
-    }
+# @lc app=leetcode id=206 lang=python3
 
-    for (int i=1
-         i < n
-         i + +) {
+# [206] Reverse Linked List
 
-        // System.out.println()
+# https://leetcode.com/problems/reverse-linked-list/description/
 
-        for (int j=0
-             j < n * k
-             j + +) {
-            int low = Math.max(0, j - k)
-            int high = Math.min(n * k, j + k)
-            int max = -1
-            for (int kk=low
-                 kk < high
-                 kk + +) {
-                if (kk < j) {
-                    int tmp = dp[kk][i - 1] - price[i] * (j - kk)
-                    if (tmp < 0) continue
-                    max = Math.max(max, tmp)
-                } else if (kk > j) {
-                    if (dp[kk][i - 1] == -1) continue
-                    int tmp = dp[kk][i - 1] + price[i] * (kk - j)
-                    max = Math.max(max, tmp)
-                } else {
-                    max = Math.max(max, dp[kk][i - 1])
-                }
-            }
-            dp[j][i] = max
-        }
+# algorithms
+# Easy (57.28%)
+# Likes:    3246
+# Dislikes: 77
+# Total Accepted:    772.2K
+# Total Submissions: 1.3M
+# Testcase Example:  '[1,2,3,4,5]'
 
-        // print
-        // for (int f=0
-                f < dp.length
-                f + +) {
-            // for (int b=0
-                    b < dp[0].length
-                    b + +) {
-                // System.out.print(dp[f][b] + " ")
-                // }
-            // System.out.println()
-            //}
-    }
+# Reverse a singly linked list.
 
-    System.out.println(dp[0][n - 1])
-}
+# Example:
+
+
+# Input: 1->2->3->4->5->NULL
+# Output: 5->4->3->2->1->NULL
+
+
+# Follow up:
+
+# A linked list can be reversed either iteratively or recursively. Could you
+# implement both?
+
+
+
+# @lc code=start
+# Definition for singly-linked list.
+class ListNode:
+    def __init__(self, x):
+      self.val = x
+      self.next = None
+
+
+class Solution:
+    def reverseList(self, head:ListNode) -> ListNode:
+        """reverse a link list in place.
+        
+        Args:
+            head: the head node of the link list.
+        
+        Returns:
+            return the head of the reversed link list.
+        """
+        current = head
+        previous = None
+        nextnode = None
+        # Use one node to record the node previous.
+        # Use the other two nodes to reverse.
+        while current:
+            """ Get the next node address first. And then reverse current and previous node. """
+            nextnode = current.next # Get the next node first.
+            current.next = previous
+            previous = current
+            current = nextnode
+        return previous
+
+# @lc code=end
+
+
