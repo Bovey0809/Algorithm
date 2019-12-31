@@ -76,8 +76,8 @@
 # @lc code=start
 
 
-class LinkedList(object):
-    """Single linked list......
+class node(object):
+    """Double linked list......
 
     Longer class information...
 
@@ -89,8 +89,6 @@ class LinkedList(object):
     def __init__(self, val):
         self.val = val
         self.next = None
-
-
 class MyLinkedList:
 
     def __init__(self):
@@ -98,46 +96,45 @@ class MyLinkedList:
         Initialize your data structure here.
         """
         self.head = None
-        self.tail = None
         self.size = 0
 
     def get(self, index: int) -> int:
         """
         Get the value of the index-th node in the linked list. If the index is invalid, return -1.
         """
-        if self.head is None or index >= self.size:
+        if index > self.size-1:
             return -1
-
-        p = self.head
+        current = self.head
+        if index == 0 and self.size == 1:
+            return current.val
         for _ in range(index):
-            p = p.next
-        return p.val
+            current = current.next
+        return current.val
 
     def addAtHead(self, val: int) -> None:
         """
         Add a node of value val before the first element of the linked list. After the insertion, the new node will be the first node of the linked list.
         """
         if self.head is None:
-            self.head = LinkedList(val)
-            self.tail = self.head
+            self.head = node(val)
         else:
-            head = LinkedList(val)
-            head.next = self.head
-            self.head = head
+            newhead = node(val)
+            newhead.next = self.head
+            self.head = newhead
         self.size += 1
 
     def addAtTail(self, val: int) -> None:
         """
         Append a node of value val to the last element of the linked list.
         """
-        if not self.head:
-            self.head = LinkedList(val)
-            self.tail = self.head
+        if self.head is None:
+            self.addAtHead(val)
         else:
-            tail = LinkedList(val)
-            self.tail.next = tail
-            self.tail = tail
-        self.size += 1
+            current = self.head
+            while current.next:
+                current = current.next
+            current.next = node(val)
+            self.size += 1
 
     def addAtIndex(self, index: int, val: int) -> None:
         """
@@ -146,47 +143,45 @@ class MyLinkedList:
         if index > self.size:
             return None
         if index == 0:
-            self.addAtHead(val)
+            return self.addAtHead(val)
+        elif index == self.size: # index == self.size is the tail.
+            return self.addAtTail(val)
         else:
-            insertnode = LinkedList(val)
             current = self.head
-            for _ in range(index-1):
+            for _ in range(index - 1):
                 current = current.next
-            insertnode.next = current.next
-            current.next = insertnode
-            if insertnode.next is None:
-                self.tail = insertnode
+            newnode = node(val)
+            newnode.next = current.next
+            current.next = newnode
             self.size += 1
 
     def deleteAtIndex(self, index: int) -> None:
         """
         Delete the index-th node in the linked list, if the index is valid.
         """
-        if index >= self.size or not self.head:
-            return -1
+        if index > self.size - 1: # 0 > 1 - 1
+            return
         if index == 0:
             self.head = self.head.next
-            if self.head is None:
-                self.tail = None
+            self.size -= 1
         else:
-            p = self.head
-            for _ in range(index-1):
-                # consider when the index is at the end.
-                if p.next is None:
-                    return
-                p = p.next
-            p.next = p.next.next
-            if p.next is None:
-                self.tail = p
-        self.size -= 1
+            current = self.head
+            for _ in range(index - 1):
+                current = current.next
+            if current.next is None:
+                current.next = None
+            else:
+                current.next = current.next.next
+            self.size -= 1
 # @lc code=end
 
 
 my = MyLinkedList()
 my.addAtHead(0)
+print(my.get(0))
 my.addAtIndex(1, 1)
+print(my.get(4))
 my.addAtTail(2)
 my.addAtIndex(3, 3)
 my.addAtTail(4)
 my.deleteAtIndex(4)
-

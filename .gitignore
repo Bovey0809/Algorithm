@@ -4,3 +4,5 @@
 *.icloud
 .DS_Store
 *~
+leetcode/.vscode/launch.json
+*.json

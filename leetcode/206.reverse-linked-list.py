@@ -31,10 +31,10 @@
 
 # @lc code=start
 # Definition for singly-linked list.
-class ListNode:
-    def __init__(self, x):
-      self.val = x
-      self.next = None
+# class ListNode:
+#     def __init__(self, x):
+#       self.val = x
+#       self.next = None
 
 
 class Solution:
@@ -47,19 +47,15 @@ class Solution:
         Returns:
             return the head of the reversed link list.
         """
-        current = head
         previous = None
+        current = head
         nextnode = None
-        # Use one node to record the node previous.
-        # Use the other two nodes to reverse.
         while current:
-            """ Get the next node address first. And then reverse current and previous node. """
-            nextnode = current.next # Get the next node first.
+            nextnode = current.next
             current.next = previous
             previous = current
             current = nextnode
         return previous
-
 # @lc code=end
 
 
