@@ -88,14 +88,15 @@ class Solution:
             return boolean value
         """
         # extreme case when head is None or head.next is None.
+        if not head or not head.next:
+            return False
         slow = fast = head
-        while fast and fast.next:
+        while fast.next and fast.next.next:
             slow = slow.next
             fast = fast.next.next
             if slow == fast:
                 return True
         return False
-
 # @lc code=end
 class ListNode(object):
     def __init__(self, x):
@@ -107,48 +108,8 @@ a = ListNode(3)
 b = ListNode(2)
 c = ListNode(0)
 d = ListNode(-4)
-a.next = b
+a.next = a
 b.next = c
 c.next = d
 d.next = b
 print(Solution().hasCycle(a))
-
-a = ListNode(1)
-print(Solution().hasCycle(a))
-
-
-class LinkedList(object):
-    """Single linked list.
-
-    Linked list sample.
-
-    Attributes:
-        val: the value of the node.
-        next: pointer to next link list node.
-    """
-    def __init__(self, val):
-        self.val = val
-        self.next = None
-
-p = LinkedList('p')
-a = LinkedList('a')
-b = LinkedList('b')
-
-p.next = a
-a.next = b
-
-print(p.val, p.next.val, p.next.next.val)
-
-def reverse(head):
-    current = head
-    previous = None
-    nextnode = None
-
-    while current:
-        nextnode = current.next
-        current.next = previous
-        previous = current
-        current = nextnode
-    return previous
-
-reverse(p)

@@ -38,7 +38,7 @@
 
 
 class Solution:
-    def reverseList(self, head:ListNode) -> ListNode:
+    def reverseList(self, head: ListNode) -> ListNode:
         """reverse a link list in place.
         
         Args:
