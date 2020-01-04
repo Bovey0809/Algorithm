@@ -46,12 +46,11 @@ class Solution:
         Returns:
             return the index of the first unique one.
         """
-        c = Counter(s)
+        c = Counter(s)                
         for index, char in enumerate(s):
             if c[char] == 1:
                 return index
-        return  -1
-                
+        return -1
         
 # @lc code=end
 

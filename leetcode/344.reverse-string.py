@@ -1,6 +1,6 @@
 
 #
-# @lc app=leetcode id=344 lang=python3
+
 #
 # [344] Reverse String
 #
@@ -47,19 +47,13 @@
 
 
 class Solution:
-
     def reverseString(self, s: list) -> None:
         """
         Do not return anything, modify s in-place instead, use recursion.
         """
-        # base case
         def helper(left, right):
             if left < right:
                 s[left], s[right] = s[right], s[left]
-                return helper(left + 1, right - 1)
-        helper(0, len(s) - 1)
-
+                helper(left+1, right-1)
+        helper(0, len(s)-1)
 # @lc code=end
-s = ["h", "e", "l", "l"]
-Solution.reverseString(s)
-print(s)

@@ -46,10 +46,10 @@ class Solution:
         Returns:
             return the max(subarray
         """
-        global_max = cur_max = nums[0]
+        global_max = current_max = nums[0]
         for num in nums[1:]:
-            cur_max = max(cur_max+num, num)
-            global_max = max(cur_max, global_max)
+            current_max = max(current_max + num, num)
+            global_max = max(global_max, current_max)
         return global_max
 # @lc code=end
 my = Solution()

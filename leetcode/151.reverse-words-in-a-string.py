@@ -75,18 +75,21 @@ class Solution:
         Returns:
             return the reversed sentence.
         """
-        # find the word
-        right = left = len(s) -1
+        if len(s) == 0:
+            return s
+        left = right = 0
         words = []
-        while left >= 0:
-            if s[left] != " ":
-                right = left
-                while left >= 0 and s[left] != " ":
-                    left -= 1
-                words.append(s[left+1:right+1])
-            left -= 1
-        return " ".join(words)
-        
+        while right < len(s):
+            if s[right] != ' ':
+                left = right
+                right += 1
+                while right < len(s) and s[right] != ' ':
+                    right += 1
+                words.append(s[left:right])
+            else:
+                right += 1
+        words.reverse()
+        return ' '.join(words)
 # @lc code=end
 my = Solution()
 print(my.reverseWords(" "))
