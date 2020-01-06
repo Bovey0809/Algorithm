@@ -36,7 +36,6 @@
 #       self.val = x
 #       self.next = None
 
-
 class Solution:
     def reverseList(self, head: ListNode) -> ListNode:
         """reverse a link list in place.
@@ -47,14 +46,12 @@ class Solution:
         Returns:
             return the head of the reversed link list.
         """
-        previous = None
+        previous = tmp = None
         current = head
-        nextnode = None
         while current:
-            nextnode = current.next
+            tmp = current.next
             current.next = previous
-            previous = current
-            current = nextnode
+            previous, current = current, tmp
         return previous
 # @lc code=end
 

@@ -5,16 +5,15 @@
 #
 
 # @lc code=start
-from functools import lru_cache
 class Solution:
-    @lru_cache
     def fib(self, N: int) -> int:
         # Recursive 948ms
         # Iteration 28ms
         # Dynamic 28ms
-        if N == 0 or N == 1:
-            return N
-        return self.fib(N-1) + self.fib(N-2)
+        left, right = 0, 1
+        for _ in range(N):
+            left, right = right, left + right
+        return left
 # @lc code=end
 
 me = Solution()

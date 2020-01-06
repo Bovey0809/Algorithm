@@ -17,9 +17,10 @@ class Solution:
             return [nums]
         # recursion
         for i, num in enumerate(nums):
-            for perm in self.permute(nums[:i] + nums[i + 1 :]):
+            for perm in self.permute(nums[:i] + nums[i + 1 :]): 
                 perm.append(num)
                 output.append(perm)
+        [perm + num for i, num in enumerate(nums) for perm in self.permute(nums[:i]+nums[i+1:])]
         return output
 # @lc code=end
 
