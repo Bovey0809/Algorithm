@@ -89,27 +89,30 @@
 
 # @lc code=start
 
-#%%
+# %%
+
+
 class Solution:
-    def compress(self, chars):
+    def compress(self, chars) -> int:
         """Compress word.
-        
+
         Args:
             chars: list of characters
-        
+
         Returns:
             length of the compressed words.
         """
-        anchor = write = 0
-        for read, char in enumerate(chars):
-            if read+1 == len(chars) or chars[read+1] != char:
-                chars[write] = chars[read]
+        write = anchor = read = 0
+        while read <= len(chars):
+            if read == len(chars) or chars[read] != chars[anchor]:
+                chars[write] = chars[anchor]
                 write += 1
-                if read > anchor:
-                    for digit in str(read-anchor+1):
+                if read > anchor + 1:
+                    for digit in str(read - anchor):
                         chars[write] = digit
                         write += 1
-                anchor = read + 1
+                anchor = read
+            read += 1
         return write
 # @lc code=end
 

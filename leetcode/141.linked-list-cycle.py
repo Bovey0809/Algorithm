@@ -88,15 +88,15 @@ class Solution:
             return boolean value
         """
         # extreme case when head is None or head.next is None.
-        if not head or not head.next:
-            return False
         slow = fast = head
-        while fast.next and fast.next.next:
+        while fast and fast.next and fast.next.next:
             slow = slow.next
             fast = fast.next.next
             if slow == fast:
                 return True
-        return False
+        else:
+            return False
+
 # @lc code=end
 class ListNode(object):
     def __init__(self, x):

@@ -7,21 +7,24 @@
 # @lc code=start
 class Solution:
     def coinChange(self, coins, amount) -> int:
-        def helper(coins, amount, cache):            
-            # base case
+        def helper(coins, amount, cache):
             if amount == 0:
                 return 0
-            elif amount in cache:
+            if amount < 0:
+                return - 1
+            if amount in cache:
                 return cache[amount]
-            # recursion
-            cache[amount] = float('inf')
+            else:
+                cache[amount] = float('inf')
             for coin in coins:
-                if amount - coin >= 0:
-                    cache[amount] = min(helper(coins, amount - coin, cache) + 1, cache[amount])
+                if amount >= coin:
+                    cache[amount] = min(cache[amount], helper(coins, amount - coin, cache) + 1)
             return cache[amount]
-        answer = helper(coins, amount, {})
-        return answer if answer != float('inf') else -1
-            
+        result = helper(coins, amount, {})
+        if result == float('inf'):
+            return - 1
+        else:
+            return result
 # @lc code=end
 
 me = Solution()
