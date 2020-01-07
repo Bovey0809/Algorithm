@@ -12,15 +12,14 @@ class Solution:
             return the permutation list of every possible.
         """
         # base case
-        output = []
         if len(nums) == 1:
             return [nums]
-        # recursion
-        for i, num in enumerate(nums):
-            for perm in self.permute(nums[:i] + nums[i + 1 :]): 
-                perm.append(num)
-                output.append(perm)
-        [perm + num for i, num in enumerate(nums) for perm in self.permute(nums[:i]+nums[i+1:])]
+        else:
+            output = []
+            for i, num in enumerate(nums):
+                for perm in self.permute(nums[:i] + nums[i + 1 :]):
+                    perm.append(num)
+                    output.append(perm)   
         return output
 # @lc code=end
 
