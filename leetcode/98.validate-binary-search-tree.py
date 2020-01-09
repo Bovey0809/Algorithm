@@ -18,7 +18,14 @@ class Solution:
         
         1: inorder add root value, whethre sorted or not.(Logic bug: when one of a right tree node is equal to the root, failed.)
         
-        2: recursive left and right tree.
+        2: recursive left and right tree. (196ms slow)
+
+        3: comapre root value with left and right. O(n)(44ms)
+
+        4: change method 3 to iteration. O(n) (56ms)
+            The iteration is a BFS, recursive is DFS, in BST, DFS seems faster.
+        
+        5. inorder traversal and judge.
 
         Args:
             root: a tree node
@@ -26,26 +33,17 @@ class Solution:
         Returns:
             return boolean
         """
-        def maxnode(node):
-            # base case
-            if not node:
-                return float('-inf')
-            # recursive
-            else:
-                return max(node.val, maxnode(node.left), maxnode(node.right))
-        def minnode(node):
-            if not node:
-                return float("inf")
-            else:
-                return min(node.val, minnode(node.left), minnode(node.right))
-        # base case
-        if not root: return True
-        # recursive
-        else:
-            if maxnode(root.left) < root.val < minnode(root.right):
-                return self.isValidBST(root.left) and self.isValidBST(root.right)
-            else:
+        stack = [(root, float('-inf'), float('inf'))]
+        while stack:
+            root, lower, upper = stack.pop()
+            if not root:
+                continue
+            val = root.val
+            if val <= lower or val >= upper:
                 return False
+            stack.append((root.right, val, upper))
+            stack.append((root.left, lower, val))
+        return True
             
 
 # @lc code=end
