@@ -25,7 +25,8 @@ class Solution:
         4: change method 3 to iteration. O(n) (56ms)
             The iteration is a BFS, recursive is DFS, in BST, DFS seems faster.
         
-        5. inorder traversal and judge.
+        5. inorder traversal and judge. O(n) (36ms)
+            DFS using stack, inorder traversal iteration version.
 
         Args:
             root: a tree node
@@ -33,16 +34,16 @@ class Solution:
         Returns:
             return boolean
         """
-        stack = [(root, float('-inf'), float('inf'))]
-        while stack:
-            root, lower, upper = stack.pop()
-            if not root:
-                continue
-            val = root.val
-            if val <= lower or val >= upper:
+        stack, inorder = [], float('-inf')
+        while stack or root:
+            while root:
+                stack.append(root)
+                root = root.left
+            root = stack.pop()
+            if root.val <= inorder:
                 return False
-            stack.append((root.right, val, upper))
-            stack.append((root.left, lower, val))
+            inorder = root.val
+            root = root.right
         return True
             
 
