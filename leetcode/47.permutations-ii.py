@@ -16,13 +16,16 @@ class Solution:
             return list of ints.
         """
         # when num in nums is not unique, the output is the same.
+        # base case: permutation one letter return itself.
         if len(nums) == 1:
             return [nums]
         output = []
+
+        # recursion: permutate unique numbers.
         for num in set(nums):
-            index = nums.index(num)
-            for perm in self.permuteUnique(nums[:index] + nums[index + 1 :]):
-                output.append([num]+perm)
+            i = nums.index(num)
+            for perm in self.permuteUnique(nums[:i] + nums[i + 1 :]):
+                output.append([num] + perm)
         return output
 # @lc code=end
 
