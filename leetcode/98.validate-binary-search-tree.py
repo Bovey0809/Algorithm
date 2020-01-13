@@ -34,19 +34,18 @@ class Solution:
         Returns:
             return boolean
         """
-        stack, inorder = [], float('-inf')
+        stack = []
+        minimum = float('-inf')
         while stack or root:
             while root:
                 stack.append(root)
                 root = root.left
             root = stack.pop()
-            if root.val <= inorder:
+            if root.val <= minimum:
                 return False
-            inorder = root.val
+            minimum = root.val
             root = root.right
         return True
-            
-
 # @lc code=end
 
 class TreeNode:
@@ -62,8 +61,9 @@ class TreeNode:
         self.left = None
         self.right = None
 
-root = TreeNode(5)
-root.left = TreeNode(4)
+root = TreeNode(2)
+root.left = TreeNode(1)
+root.right = TreeNode(3)
 
 
 me = Solution()

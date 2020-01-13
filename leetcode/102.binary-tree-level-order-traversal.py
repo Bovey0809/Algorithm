@@ -12,30 +12,28 @@
 #         self.left = None
 #         self.right = None
 
-import collections
 
-
+from collections import deque
 class Solution:
     def levelOrder(self, root):
-        level, output, nodes = collections.deque([root]), [], []
-        current_count, next_count = 1, 0
+        """Level order traversal.
+        
+        method1: Python List Comprehension
+        method2: Using deque
+
+        Args:
+            root: treenode
+        
+        Returns:
+            return level order.
+        """
+        level,  result = [root], []
         while level and root:
-            node = level.popleft()
-            current_count -= 1
-            nodes.append(node.val)
-            if node.left:
-                level.append(node.left)
-                next_count += 1
-
-            if node.right:
-                level.append(node.right)
-                next_count += 1
-
-            if not current_count:
-                output.append(nodes)
-                nodes = []
-                current_count, next_count = next_count, current_count
-        return output
+            result.append([node.val for node in level if node])
+            pairs = [(node.left, node.right) for node in level if node]
+            level = [node for pair in pairs for node in pair if node]
+        return result
+        
 # @lc code=end
 
 

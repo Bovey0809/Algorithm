@@ -17,16 +17,15 @@ class Solution:
         """
         # when num in nums is not unique, the output is the same.
         # base case: permutation one letter return itself.
+        result = []
         if len(nums) == 1:
             return [nums]
-        output = []
-
-        # recursion: permutate unique numbers.
         for num in set(nums):
             i = nums.index(num)
             for perm in self.permuteUnique(nums[:i] + nums[i + 1 :]):
-                output.append([num] + perm)
-        return output
+                result.append(perm + [num])
+        return result
+                
 # @lc code=end
 
 

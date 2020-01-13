@@ -7,24 +7,12 @@
 # @lc code=start
 class Solution:
     def coinChange(self, coins, amount) -> int:
-        def helper(coins, amount, cache):
-            if amount == 0:
-                return 0
-            if amount < 0:
-                return - 1
-            if amount in cache:
-                return cache[amount]
-            else:
-                cache[amount] = float('inf')
-            for coin in coins:
-                if amount >= coin:
-                    cache[amount] = min(cache[amount], helper(coins, amount - coin, cache) + 1)
-            return cache[amount]
-        result = helper(coins, amount, {})
-        if result == float('inf'):
-            return - 1
-        else:
-            return result
+        dp = [float('inf')] * (amount + 1)
+        dp[0] = 0
+        for coin in coins:
+            for rem in range(coin, amount + 1):
+                dp[rem] = min(dp[rem], dp[rem - coin] + 1)
+        return -1 if dp[amount] == float('inf') else dp[amount]
 # @lc code=end
 
 me = Solution()

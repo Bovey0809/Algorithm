@@ -79,18 +79,20 @@ class Solution:
         """
         # if s isn't even length, return false.
         # Extreme case
-        if len(s) % 2:
-            return False
-        stack, opening = [], '([{'
-        match = {'(': ')', '[': ']', '{': '}'}
+        stack = []
+        match = {'(':')', '[':']', '{':'}'}
         for char in s:
-            if char not in opening:
-                if not stack or char != match[stack.pop()]:
-                    return False
-            else:
+            if char in match:
                 stack.append(char)
-        return False if stack else True
-
+            else:
+                if not stack: return False
+                openchar = stack.pop()
+                if char != match[openchar]:
+                    return False
+        if not stack:
+            return True
+        else:
+            return False
 # @lc code=end
 Solution().isValid("()")
 Solution().isValid("((")
