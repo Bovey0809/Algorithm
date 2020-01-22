@@ -38,21 +38,12 @@
 
 class Solution:
     def reverseList(self, head: ListNode) -> ListNode:
-        """reverse a link list in place.
-        
-        Args:
-            head: the head node of the link list.
-        
-        Returns:
-            return the head of the reversed link list.
-        """
-        previous = tmp = None
-        current = head
-        while current:
-            tmp = current.next
-            current.next = previous
-            previous, current = current, tmp
-        return previous
+        cur = tmp = head
+        pre = None
+        while cur:
+            tmp, cur.next = cur.next, pre
+            cur, pre = tmp, cur
+        return pre
 # @lc code=end
 
 

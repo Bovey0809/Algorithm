@@ -14,39 +14,15 @@
 
 class Solution:
     def inorderTraversal(self, root):
-        """Inorder traversal iteration.
-        
-        Args:
-            root: root of the tree.
-        
-        Returns:
-            return list.
-        """
         stack = []
         result = []
         while stack or root:
             while root:
                 stack.append(root)
                 root = root.left
-            root = stack.pop()        
+            root = stack.pop()
             result.append(root.val)
             root = root.right
         return result
 # @lc code=end
-
-class TreeNode(object):
-    """Tree node
-    """
-    def __init__(self, val):
-        self.val = val
-        self.left = None
-        self.right = None
-    
-root = TreeNode(1)
-root.right = TreeNode(2)
-root.right.left = TreeNode(3)
-
-me = Solution()
-me.inorderTraversal(root)
-
 

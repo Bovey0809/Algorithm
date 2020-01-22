@@ -18,4 +18,3 @@ class Solution:
 
 me = Solution()
 print(me.fib(0))
-

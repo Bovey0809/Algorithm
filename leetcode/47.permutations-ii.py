@@ -6,25 +6,15 @@
 
 # @lc code=start
 class Solution:
-    def permuteUnique(self, nums:list) -> list:
-        """Permutation using return unique result.
-        
-        Args:
-            nums: list of integers.
-        
-        Returns:
-            return list of ints.
-        """
-        # when num in nums is not unique, the output is the same.
-        # base case: permutation one letter return itself.
-        result = []
+    def permuteUnique(self, nums: list) -> list:
         if len(nums) == 1:
             return [nums]
+        output = []
         for num in set(nums):
-            i = nums.index(num)
-            for perm in self.permuteUnique(nums[:i] + nums[i + 1 :]):
-                result.append(perm + [num])
-        return result
+            index = nums.index(num)
+            for perm in self.permuteUnique(nums[:index] + nums[index + 1 :]):
+                output.append([num] + perm)
+        return output
                 
 # @lc code=end
 

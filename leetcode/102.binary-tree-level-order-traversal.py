@@ -16,26 +16,15 @@
 from collections import deque
 class Solution:
     def levelOrder(self, root):
-        """Level order traversal.
-        
-        method1: Python List Comprehension
-        method2: Using deque
-
-        Args:
-            root: treenode
-        
-        Returns:
-            return level order.
-        """
-        level,  result = [root], []
+        level = [root]
+        output = []
         while level and root:
-            result.append([node.val for node in level if node])
-            pairs = [(node.left, node.right) for node in level if node]
+            output.append([node.val for node in level])
+            pairs = [(node.left, node.right) for node in level]
             level = [node for pair in pairs for node in pair if node]
-        return result
-        
-# @lc code=end
+        return output
 
+# @lc code=end
 
 class TreeNode:
     def __init__(self, x):

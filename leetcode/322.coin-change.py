@@ -10,9 +10,10 @@ class Solution:
         dp = [float('inf')] * (amount + 1)
         dp[0] = 0
         for coin in coins:
-            for rem in range(coin, amount + 1):
+            # for rem in range(coin, amount + 1):
                 dp[rem] = min(dp[rem], dp[rem - coin] + 1)
-        return -1 if dp[amount] == float('inf') else dp[amount]
+        result = dp[amount]
+        return result if result != float('inf') else -1
 # @lc code=end
 
 me = Solution()

@@ -1,15 +1,18 @@
 # @lc app=leetcode id=344 lang=python3
 # @lc code=start
 class Solution:        
-    def reverseString(self, s: List[str]) -> None:
+    def reverseString(self, s) -> None:
         """
         Do not return anything, modify s in-place instead.
         """
-        def _reverse(left, right):
-            if left < right:
-                s[left], s[right] = s[right], s[left]
-                _reverse(left+1, right-1)
-        return _reverse(0, len(s)-1)
+        def reverse(left, right):
+            if left >= right:
+                return
+            s[left], s[right] = s[right], s[left]
+            left += 1
+            right -= 1
+            return reverse(left, right)
+        return reverse(0, len(s) - 1)
 # @lc code=end
 
 me = Solution()

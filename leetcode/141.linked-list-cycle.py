@@ -77,25 +77,13 @@
 
 class Solution:
     def hasCycle(self, head) -> bool:
-        """Decide whehter there is a cycle.
-
-        Using two pointers with different speed.
-
-        Args:
-            head: linked list
-
-        Returns:
-            return boolean value
-        """
-        # extreme case when head is None or head.next is None.
         slow = fast = head
-        while fast and fast.next and fast.next.next:
+        while fast and fast.next:
             slow = slow.next
             fast = fast.next.next
             if slow == fast:
                 return True
-        else:
-            return False
+        return False
 
 # @lc code=end
 class ListNode(object):

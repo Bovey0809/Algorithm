@@ -3,22 +3,13 @@
 
 class Solution:
     def permute(self, nums:list) -> list:
-        """Permuta distinct elements using RECURSION.
-        
-        Args:
-            nums: list of int.
-        
-        Returns:
-            return the permutation list of every possible.
-        """
-        # base case
-        output = []
         if len(nums) == 1:
             return [nums]
-        else:
-            for i, num in enumerate(nums):
-                for perm in self.permute(nums[:i] + nums[i + 1 :]):
-                    output.append([num] + perm)
+        output = []
+        for num in nums:
+            index = nums.index(num)
+            for perm in self.permute(nums[:index] + nums[index + 1 :]):
+                output.append(perm + [num])
         return output
                 
 # @lc code=end
