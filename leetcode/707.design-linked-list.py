@@ -3,15 +3,6 @@
 
 
 class node(object):
-    """Double linked list......
-
-    Longer class information...
-
-    Attributes:
-        val: value
-        next: next node
-    """
-
     def __init__(self, val):
         self.val = val
         self.next = None

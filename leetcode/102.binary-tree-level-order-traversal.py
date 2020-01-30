@@ -11,19 +11,31 @@
 #         self.val = x
 #         self.left = None
 #         self.right = None
-
-
-from collections import deque
+from queue import Queue
 class Solution:
     def levelOrder(self, root):
-        level = [root]
-        output = []
-        while level and root:
-            output.append([node.val for node in level])
-            pairs = [(node.left, node.right) for node in level]
-            level = [node for pair in pairs for node in pair if node]
-        return output
-
+        q = Queue()
+        q.put(root)
+        count, next_count = 1, 0
+        result = []
+        nodes = []
+        while not q.empty() and root:
+            node = q.get()
+            count -= 1
+            nodes.append(node.val)
+            if node.left:
+                q.put(node.left)
+                next_count += 1
+            if node.right:
+                q.put(node.right)
+                next_count += 1
+            if count == 0:
+                result.append(nodes)
+                nodes = []
+                count, next_count = next_count, count
+        return result
+                
+            
 # @lc code=end
 
 class TreeNode:

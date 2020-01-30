@@ -14,12 +14,13 @@ class Solution:
                 return mid
             if nums[mid] < target:
                 left = mid + 1
+                continue
             if nums[mid] > target:
                 right = mid - 1
+                continue
         return -1
-            
 # @lc code=end
 
 my = Solution()
-print(my.search([-1, 0, 3, 5, 9, 12], 13))
+print(my.search([-1, 0, 3, 5, 9, 12], 9))
 
