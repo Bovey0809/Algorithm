@@ -67,33 +67,18 @@
 
 class Solution:
     def isValid(self, s: str) -> bool:
-        """Judge paired parenthenses.
-
-        When opening, append to stack, when closing, pop and compare.
-
-        Args:
-            s: string of parenthenses.
-
-        Returns:
-            return boolean.
-        """
-        # if s isn't even length, return false.
-        # Extreme case
         stack = []
-        match = {'(':')', '[':']', '{':'}'}
-        for char in s:
-            if char in match:
-                stack.append(char)
+        match = {'(': ')', '[': ']', '{': '}'}
+        for par in s:
+            if par in match:
+                stack.append(par)
+                continue
+            if not stack:
+                return False
+            cur = stack.pop()
+            if par == match[cur]:
+                continue
             else:
-                if not stack: return False
-                openchar = stack.pop()
-                if char != match[openchar]:
-                    return False
-        if not stack:
-            return True
-        else:
-            return False
+                return False
+        return True if not stack else False
 # @lc code=end
-Solution().isValid("()")
-Solution().isValid("((")
-Solution().isValid("){")

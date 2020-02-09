@@ -5,22 +5,25 @@
 #
 # @lc code=start
 
+
 class Solution:
     def search(self, nums, target: int) -> int:
-        left, right = 0, len(nums) - 1
-        while left <= right:
-            mid = (left + right) // 2
+        # reverse version Time Complexity Analyse
+        def helper(nums, left, right):
+            if left > right:
+                return - 1
+            mid = (ri
+            ght - left) // 2 + left
             if nums[mid] == target:
                 return mid
             if nums[mid] < target:
-                left = mid + 1
-                continue
+                return helper(nums, mid+1, right)
             if nums[mid] > target:
-                right = mid - 1
-                continue
-        return -1
+                return helper(nums, left, mid - 1)
+        return helper(nums, 0, len(nums))
+
+
 # @lc code=end
 
 my = Solution()
 print(my.search([-1, 0, 3, 5, 9, 12], 9))
-

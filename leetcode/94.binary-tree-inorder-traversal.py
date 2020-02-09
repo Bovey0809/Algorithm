@@ -12,17 +12,20 @@
 #         self.left = None
 #         self.right = None
 
+
 class Solution:
     def inorderTraversal(self, root):
+        # Inoder traversal iteration using one stack.
+        # The root value here is like a pointer.
         stack = []
         result = []
         while stack or root:
-            while root:
+            if root:
                 stack.append(root)
                 root = root.left
-            root = stack.pop()
-            result.append(root.val)
-            root = root.right
+            else:  # indicate the root is None and stack is not empty.
+                root = stack.pop()
+                result.append(root.val)
+                root = root.right
         return result
 # @lc code=end
-

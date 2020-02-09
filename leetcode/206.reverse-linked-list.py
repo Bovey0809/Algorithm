@@ -28,7 +28,6 @@
 # implement both?
 
 
-
 # @lc code=start
 # Definition for singly-linked list.
 # class ListNode:
@@ -38,12 +37,11 @@
 
 class Solution:
     def reverseList(self, head: ListNode) -> ListNode:
-        cur = tmp = head
         pre = None
-        while cur:
-            tmp, cur.next = cur.next, pre
-            cur, pre = tmp, cur
+        while head:
+            temp = head.next
+            head.next = pre
+            pre = head
+            head = temp
         return pre
 # @lc code=end
-
-

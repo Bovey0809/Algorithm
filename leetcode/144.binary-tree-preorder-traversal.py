@@ -12,9 +12,19 @@
 #         self.left = None
 #         self.right = None
 
+
 class Solution:
     def preorderTraversal(self, root: TreeNode) -> List[int]:
-        while root:
-            pass
+        if not root:
+            return []
+        stack = [root]
+        result = []
+        while stack:
+            root = stack.pop()
+            result.append(root.val)
+            if root.right:
+                stack.append(root.right)
+            if root.left:
+                stack.append(root.left)
+        return result    
 # @lc code=end
-

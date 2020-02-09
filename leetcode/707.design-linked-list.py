@@ -22,7 +22,6 @@ class MyLinkedList:
         if 0 <= index < self.size:
             for _ in range(index):
                 root = root.next
-            print(root.val)
             return root.val
         else:
             return -1

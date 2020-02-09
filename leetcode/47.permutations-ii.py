@@ -7,15 +7,14 @@
 # @lc code=start
 class Solution:
     def permuteUnique(self, nums: list) -> list:
+        result = []
         if len(nums) == 1:
             return [nums]
-        output = []
         for num in set(nums):
             index = nums.index(num)
             for perm in self.permuteUnique(nums[:index] + nums[index + 1 :]):
-                output.append([num] + perm)
-        return output
-                
+                result.append([num] + perm)
+        return result
 # @lc code=end
 
 

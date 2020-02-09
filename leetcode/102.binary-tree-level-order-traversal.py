@@ -12,31 +12,22 @@
 #         self.left = None
 #         self.right = None
 from queue import Queue
+
+
 class Solution:
     def levelOrder(self, root):
-        q = Queue()
-        q.put(root)
-        count, next_count = 1, 0
+        if not root:
+            return
+        level = [root]
         result = []
-        nodes = []
-        while not q.empty() and root:
-            node = q.get()
-            count -= 1
-            nodes.append(node.val)
-            if node.left:
-                q.put(node.left)
-                next_count += 1
-            if node.right:
-                q.put(node.right)
-                next_count += 1
-            if count == 0:
-                result.append(nodes)
-                nodes = []
-                count, next_count = next_count, count
+        while level:
+            nodes = [node for node in level]
+            result.append([node.val for node in nodes])
+            pairs = [(node.left, node.right) for node in nodes]
+            level = [node for pair in pairs for node in pair if node]
         return result
-                
-            
 # @lc code=end
+
 
 class TreeNode:
     def __init__(self, x):
