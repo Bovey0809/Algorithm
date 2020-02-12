@@ -81,37 +81,36 @@ def inverse_shell_sort(nums):
 inverse_shell_sort(random_array)
 
 
-# Recursively implementation of Merge Sort
 def merge(left, right):
-    result = []
+    # merge two nums
+    nums = []
     while left and right:
-        if left[0] <= right[0]:
-            result.append(left.pop(0))
+        if left[0] > right[0]:
+            nums.append(right.pop(0))
         else:
-            result.append(right.pop(0))
+            nums.append(left.pop(0))
     if left:
-        result += left
+        nums += left
     if right:
-        result += right
-    return result
+        nums += right
+    return nums
+# Recursively implementation of Merge Sort
 
 
-def merge_sort(L):
-    if len(L) <= 1:
-        # When D&C to 1 element, just return it
-        return L
-    mid = len(L) // 2
-    left = L[:mid]
-    right = L[mid:]
-
+def merge_sort(nums):
+    length = len(nums)
+    if length <= 1:
+        return nums
+    mid = length // 2
+    left = nums[:mid]
+    right = nums[mid:]
     left = merge_sort(left)
     right = merge_sort(right)
-    # conquer sub-problem recursively
     return merge(left, right)
-    # return the answer of sub-problem
 
 
 merge_sort(random_array)
+print(random_array)
 
 
 def quick_sort(arr):

@@ -15,14 +15,15 @@
 
 class Solution:
     def trimBST(self, root, L, R):
-        if root:
-            if L <= root.val <= R:
-                root.left = self.trimBST(root.left, L, root.val)
-                root.right = self.trimBST(root.right, root.val, R)
-            if L > root.val:
-                return self.trimBST(root.right, L, R)
-            if root.val > R:
-                return self.trimBST(root.left, L, R)
+        if not root:
+            return None
+        if L <= root.val <= R:
+            root.left = self.trimBST(root.left, L, root.val)
+            root.right = self.trimBST(root.right, root.val, R)
+        elif root.val < L:
+            root = self.trimBST(root.right, L, R)
+        else:
+            root = self.trimBST(root.left, L, R)
         return root
 # @lc code=end
 

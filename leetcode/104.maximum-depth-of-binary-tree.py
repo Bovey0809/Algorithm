@@ -12,11 +12,13 @@
 #         self.left = None
 #         self.right = None
 
+
 class Solution:
     def maxDepth(self, root: TreeNode) -> int:
+        # base case
         if not root:
             return 0
-        return max(self.maxDepth(root.left), self.maxDepth(root.right)) + 1
+        else:
+            return max(self.maxDepth(root.left), self.maxDepth(root.right)) + 1
 
 # @lc code=end
-

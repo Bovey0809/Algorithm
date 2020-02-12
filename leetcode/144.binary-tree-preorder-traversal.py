@@ -26,5 +26,5 @@ class Solution:
                 stack.append(root.right)
             if root.left:
                 stack.append(root.left)
-        return result    
+        return result
 # @lc code=end

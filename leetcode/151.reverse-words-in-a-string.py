@@ -5,24 +5,16 @@
 
 class Solution:
     def reverseWords(self, s: str) -> str:
-        # find the words
-        read = write = 0
+        pt = 0
         words = []
-        while read < len(s):
-            if s[read] != ' ':
-                write = read
-                # begin
-                while read < len(s) and s[read] != ' ':
-                    read += 1
-                word = s[write:read]
+        while pt < len(s):
+            if s[pt] != " ":
+                start = pt
+                while pt < len(s) and s[pt] != " ":
+                    pt += 1
+                word = s[start:pt]
                 words.append(word)
             else:
-                read += 1
+                pt += 1
         return " ".join(list(reversed(words)))
-
-
 # @lc code=end
-my = Solution()
-print(my.reverseWords(" "))
-print(my.reverseWords("the sky is blue"))
-print(my.reverseWords("  hello world!  "))

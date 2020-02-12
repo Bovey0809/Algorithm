@@ -7,8 +7,8 @@
 
 class Solution:
     def compress(self, chars) -> int:
-        anchor = write = read = 0
-        while read < len(chars):
+        write = read = anchor = 0
+        for read in range(len(chars)):
             if read == len(chars) - 1 or chars[read] != chars[read + 1]:
                 chars[write] = chars[anchor]
                 write += 1
@@ -18,7 +18,6 @@ class Solution:
                         chars[write] = digit
                         write += 1
                 anchor = read + 1
-            read += 1
         return write
 # @lc code=end
 
