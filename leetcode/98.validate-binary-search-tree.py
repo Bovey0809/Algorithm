@@ -15,17 +15,13 @@
 
 class Solution:
     def isValidBST(self, root) -> bool:
-        # in order traversal
-        stack = []
-        minimum = float('-inf')
-        while stack or root:
-            while root:
-                stack.append(root)
-                root = root.left
-            root = stack.pop()
-            if root.val <= minimum:
-                return False
-            minimum = root.val
-            root = root.right
-        return True
+        def _helper(root, minimum, maximum):
+            # base case
+            if not root:
+                return True
+            if minimum < root.val < maximum:
+                return _helper(root.left, minimum, root.val) and _helper(root.right, root.val, maximum)
+            return False
+        return _helper(root, float('-inf'), float('inf'))
+
 # @lc code=end

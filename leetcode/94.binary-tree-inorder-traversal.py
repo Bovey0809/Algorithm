@@ -20,12 +20,11 @@ class Solution:
         stack = []
         result = []
         while stack or root:
-            if root:
+            while root:
                 stack.append(root)
                 root = root.left
-            else:  # indicate the root is None and stack is not empty.
-                root = stack.pop()
-                result.append(root.val)
-                root = root.right
+            root = stack.pop()
+            result.append(root.val)
+            root = root.right
         return result
 # @lc code=end

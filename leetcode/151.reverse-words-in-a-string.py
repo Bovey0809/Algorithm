@@ -5,16 +5,19 @@
 
 class Solution:
     def reverseWords(self, s: str) -> str:
-        pt = 0
+        read = 0
         words = []
-        while pt < len(s):
-            if s[pt] != " ":
-                start = pt
-                while pt < len(s) and s[pt] != " ":
-                    pt += 1
-                word = s[start:pt]
-                words.append(word)
+        while read < len(s):
+            if s[read] != " ":
+                start = read
+                while read < len(s) and s[read] != " ":
+                    read += 1
+                words.append(s[start:read])
             else:
-                pt += 1
+                read += 1
         return " ".join(list(reversed(words)))
 # @lc code=end
+
+
+my = Solution()
+my.reverseWords("the sky is blue")
