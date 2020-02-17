@@ -11,21 +11,36 @@
 #         self.val = x
 #         self.left = None
 #         self.right = None
+
+
 from queue import Queue
 
 
 class Solution:
     def levelOrder(self, root):
         if not root:
-            return
-        level = [root]
+            return []
+        q = Queue()
+        q.put(root)
+        count, nextCount = 1, 0
         result = []
-        while level:
-            nodes = [node for node in level]
-            result.append([node.val for node in nodes])
-            pairs = [(node.left, node.right) for node in nodes]
-            level = [node for pair in pairs for node in pair if node]
+        level = []
+        while not q.empty():
+            node = q.get()
+            count -= 1
+            level.append(node.val)
+            if node.left:
+                q.put(node.left)
+                nextCount += 1
+            if node.right:
+                q.put(node.right)
+                nextCount += 1
+            if count == 0:
+                result.append(level)
+                count, nextCount = nextCount, count
+                level = []
         return result
+
 # @lc code=end
 
 

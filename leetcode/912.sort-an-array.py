@@ -7,27 +7,33 @@
 # @lc code=start
 
 
+import random
+
+
 class Solution:
-    def sortArray(self, nums: List[int]) -> List[int]:
+    def sortArray(self, nums):
         def partition(nums, low, high):
-            pivotvalue = nums[high]
+            p = nums[high]
             i = low - 1
-            j = low
-            while j < high:
-                if nums[j] > pivotvalue:
-                    j += 1
-                else:
+            for j in range(low, high):
+                if nums[j] < p:
                     i += 1
                     nums[i], nums[j] = nums[j], nums[i]
-                    j += 1
-            nums[i + 1], nums[high] = nums[high], nums[i + 1]
+            nums[i+1], nums[high] = nums[high], nums[i+1]
             return i + 1
 
-        def quicksort(nums, low, high):
+        def quickSort(nums, low, high):
             if low < high:
                 pivot = partition(nums, low, high)
-                quicksort(nums, low, pivot - 1)
-                quicksort(nums, pivot + 1, high)
-            return nums
-        return quicksort(nums, 0, len(nums) - 1)
+                quickSort(nums, low, pivot - 1)
+                quickSort(nums, pivot+1, high)
+        quickSort(nums, 0, len(nums) - 1)
+        return nums
+
+
 # @lc code=end
+
+
+my = Solution()
+test = [random.randint(1, 10000) for _ in range(random.randint(0, 10))]
+print(my.sortArray(test))
