@@ -8,16 +8,15 @@ class Solution:
         read = 0
         words = []
         while read < len(s):
-            if s[read] != " ":
-                start = read
+            if read < len(s) and s[read] != " ":
+                anchor = read
                 while read < len(s) and s[read] != " ":
                     read += 1
-                words.append(s[start:read])
-            else:
-                read += 1
-        return " ".join(list(reversed(words)))
+                words.append(s[anchor:read])
+            read += 1
+        return " ".join(reversed(words))
 # @lc code=end
 
 
 my = Solution()
-my.reverseWords("the sky is blue")
+print(my.reverseWords("the sky is blue"))

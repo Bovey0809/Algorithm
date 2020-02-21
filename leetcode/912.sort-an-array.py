@@ -12,25 +12,12 @@ import random
 
 class Solution:
     def sortArray(self, nums):
-        def partition(nums, low, high):
-            p = nums[high]
-            i = low - 1
-            for j in range(low, high):
-                if nums[j] < p:
-                    i += 1
-                    nums[i], nums[j] = nums[j], nums[i]
-            nums[i+1], nums[high] = nums[high], nums[i+1]
-            return i + 1
-
-        def quickSort(nums, low, high):
-            if low < high:
-                pivot = partition(nums, low, high)
-                quickSort(nums, low, pivot - 1)
-                quickSort(nums, pivot+1, high)
-        quickSort(nums, 0, len(nums) - 1)
+        # bubble sort
+        for i in range(1, len(nums)):
+            for j in range(i):
+                if nums[j] > nums[j + 1]:
+                    nums[j], nums[j+1] = nums[j+1], nums[j]
         return nums
-
-
 # @lc code=end
 
 
