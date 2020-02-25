@@ -8,7 +8,7 @@
 class Solution:
     def compress(self, chars) -> int:
         anchor = write = 0
-        for read in range(len(chars)):
+        for read, char in enumerate(chars):
             if read == len(chars) - 1 or chars[read] != chars[read + 1]:
                 chars[write] = chars[anchor]
                 write += 1

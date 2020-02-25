@@ -12,8 +12,15 @@ from bisect import bisect
 class Solution:
     def nextGreatestLetter(self, letters, target: str) -> str:
         # binary search
-        index = bisect(letters, target, 0, len(letters))
-        return letters[index % len(letters)]
+        left, right = 0, len(letters)
+        while left < right:
+            mid = (left + right) // 2
+            v = letters[mid]
+            if v <= target:
+                left = mid + 1
+            else:
+                right = mid
+        return letters[right % len(letters)]
 # @lc code=end
 
 

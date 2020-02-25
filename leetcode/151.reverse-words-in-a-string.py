@@ -5,16 +5,18 @@
 
 class Solution:
     def reverseWords(self, s: str) -> str:
-        read = 0
+        anchor = read = 0
         words = []
         while read < len(s):
-            if read < len(s) and s[read] != " ":
+            if s[read] != ' ':
                 anchor = read
-                while read < len(s) and s[read] != " ":
+                while read < len(s) and s[read] != ' ':
                     read += 1
-                words.append(s[anchor:read])
-            read += 1
-        return " ".join(reversed(words))
+                word = s[anchor:read]
+                words.append(word)
+            else:
+                read += 1
+        return ' '.join(list(reversed(words)))
 # @lc code=end
 
 

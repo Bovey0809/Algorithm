@@ -6,6 +6,9 @@
 '''
 
 
+from functools import reduce
+
+
 class Vertex(object):
     """Vertex of Graph.
 
@@ -20,6 +23,7 @@ class Vertex(object):
         super().__init__()
         self.id = key
         self.connectedTo = {}
+        self.visited = False
 
     def addNeighbor(self, nbr, weight=0):
         self.connectedTo[nbr] = weight
@@ -27,7 +31,7 @@ class Vertex(object):
     def __str__(self):
         return str(self.id) + ' connectedTo: ' + str([x.id for x in self.connectedTo])
 
-    def getConnections(self):
+    def getConnections(self) -> list:
         return self.connectedTo.keys()
 
     def getId(self):
@@ -73,19 +77,41 @@ class Graph(object):
 
         self.verList[f].addNeighbor(self.verList[t], cost)
 
-    def getVertex(self):
+    def addEdgeList(self, f, t: list, cost=0):
+        for node in t:
+            self.addEdge(f, node)
+
+    def getVertices(self):
         return self.verList.keys()
 
     def __iter__(self):
         return iter(self.verList.values())
 
 
-g = Graph()
-for i in range(6):
-    g.addVertex(i)
+# create a Graph
 
-g.addEdge(0, 1, 2)
-for vertex in g:
-    print(vertex)
-    print(vertex.getConnections())
-    print('\n')
+test_g = Graph()
+for i in range(1, 7):
+    test_g.addVertex(i)
+
+test_g.addEdgeList(1, [2, 3, 4])
+test_g.addEdgeList(2, [1, 5])
+test_g.addEdge(3, 4)
+test_g.addEdgeList(4, [1, 3, 5, 6])
+test_g.addEdgeList(5, [2, 4, 5])
+test_g.addEdgeList(6, [4, 5])
+
+# Deep first traversal
+# iteration version
+
+
+def depthFirstTraverse(node: Vertex):
+    # recursion
+    node.visited = True
+    print(node)
+    for link in node.getConnections():
+        if not link.visited:
+            depthFirstTraverse(link)
+
+
+depthFirstTraverse(test_g.getVertex(1))
