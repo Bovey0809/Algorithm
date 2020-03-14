@@ -87,7 +87,8 @@ class Graph(object):
     def __iter__(self):
         return iter(self.verList.values())
 
-
+    def __getitem__(self, i):
+        return self.getVertex(i)
 # create a Graph
 
 test_g = Graph()
@@ -106,12 +107,13 @@ test_g.addEdgeList(6, [4, 5])
 
 
 def depthFirstTraverse(node: Vertex):
-    # recursion
-    node.visited = True
-    print(node)
-    for link in node.getConnections():
-        if not link.visited:
-            depthFirstTraverse(link)
-
-
+    # iterative
+    stack = [node]
+    while stack:
+        node = stack.pop()
+        for link in node.getConnections():
+            if not link.visited:
+                print(link)
+                link.visited = True
+                stack.append(link)
 depthFirstTraverse(test_g.getVertex(1))

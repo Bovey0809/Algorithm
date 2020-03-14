@@ -46,10 +46,3 @@ class MyQueue:
 # param_3 = obj.peek()
 # param_4 = obj.empty()
 # @lc code=end
-
-obj = MyQueue()
-obj.push(1)
-obj.push(2)
-obj.peek()
-obj.pop()
-obj.empty()

@@ -12,16 +12,18 @@ import random
 
 class Solution:
     def sortArray(self, nums):
-        for i, num in enumerate(nums):
+        # insertion sort
+        for i in range(len(nums)):
+            temp = nums[i]
             j = i - 1
-            while j >= 0 and nums[j] > num:
-                nums[j+1] = nums[j]
+            while j >= 0 and nums[j] > temp:
+                nums[j + 1] = nums[j]
                 j -= 1
-            nums[j + 1] = num
+            nums[j + 1] = temp
         return nums
 # @lc code=end
 
 
 my = Solution()
-test = [random.randint(1, 10) for _ in range(random.randint(0, 10))]
+test = [random.randint(1, 20) for _ in range(random.randint(0, 10))]
 print(my.sortArray(test))

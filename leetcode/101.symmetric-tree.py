@@ -15,21 +15,16 @@
 
 class Solution:
     def isSymmetric(self, root: TreeNode) -> bool:
-        if not root:
-            return True
-        else:
-            queue = [root.left, root.right]
-            while queue:
-                a = queue.pop(0)
-                b = queue.pop(0)
-                if a and b:
-                    if a.val == b.val:
-                        queue.extend([a.left, b.right, a.right, b.left])
-                    else:
-                        return False
-                elif (not a) and (not b):
+        q = [root, root]
+        while q:
+            a = q.pop(0)
+            b = q.pop(0)
+            if not a and not b:
+                continue
+            if a and b:
+                if a.val == b.val:
+                    q.extend([a.left, b.right, a.right, b.left])
                     continue
-                else:
-                    return False
+            return False
         return True
 # @lc code=end

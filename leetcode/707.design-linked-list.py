@@ -6,73 +6,55 @@ class node(object):
     def __init__(self, val):
         self.val = val
         self.next = None
-
-
 class MyLinkedList:
 
     def __init__(self):
         """
         Initialize your data structure here.
         """
-        self.head = None
+        self.top = node(0)  # guard
         self.size = 0
 
     def get(self, index: int) -> int:
-        root = self.head
-        if 0 <= index < self.size:
-            for _ in range(index):
-                root = root.next
-            return root.val
-        else:
-            return -1
-        
+        if index < self.size:
+            return self.findCellBefore(index).next.val
+        return -1            
     def addAtHead(self, val: int) -> None:
+        self.addAtIndex(0, val)
+
+    def addAtTail(self, val: int) -> None:
+        self.addAtIndex(self.size, val)
+    
+    def addAtIndex(self, index: int, val: int) -> None:
         newnode = node(val)
-        if self.head:
-            newnode.next, self.head = self.head, newnode
-        else:
-            self.head = newnode
+        afterMe = self.findCellBefore(index)
+        newnode.next = afterMe.next
+        afterMe.next = newnode
         self.size += 1
         
-    def addAtTail(self, val: int) -> None:
-        root = self.head
-        if not root:
-            self.addAtHead(val)
-        newnode = node(val)
-        for _ in range(self.size - 1):
-            root = root.next
-        root.next = newnode
-        self.size += 1
-
-    def addAtIndex(self, index: int, val: int) -> None:
-        if 0 <= index <= self.size:
-            if index == 0: return self.addAtHead(val)
-            if index == self.size: return self.addAtTail(val)
-            
-            root, newnode = self.head, node(val)
-            for _ in range(0, index - 1):
-                root = root.next
-            newnode.next, root.next = root.next, newnode
-            self.size += 1
-
     def deleteAtIndex(self, index: int) -> None:
-        if 0 <= index < self.size:
-            if index == 0:
-                self.head = self.head.next
-                self.size -= 1
-                return
-            root = self.head
-            for _ in range(index - 1):
-                root = root.next
-            root.next = root.next.next
+        if index < self.size:
+            afterMe = self.findCellBefore(index)
+            afterMe.next = afterMe.next.next
             self.size -= 1
+        
+    def findCellBefore(self, index):
+        top = self.top
+        count = 0
+        while top.next:
+            if count == index:
+                return top # return the previous node.
+            top = top.next
+            count += 1
+        return top
 # @lc code=end
 
 
 my = MyLinkedList()
 my.addAtHead(1)
 my.addAtTail(3)
-my.addAtIndex(1, 2)
+my.addAtIndex(2, 2)
 my.get(1)
 my.deleteAtIndex(1)
-my.get(0)
+my.get(1)
+print(my)

@@ -15,16 +15,11 @@
 
 class Solution:
     def isValidBST(self, root) -> bool:
-        stack = []
-        minimum = float('-inf')
-        while stack or root:
-            while root:
-                stack.append(root)
-                root = root.left
-            root = stack.pop()
-            if root.val <= minimum:
+        def _helper(node, minimum, maximum):
+            if not node:
+                return True
+            if not minimum < node.val < maximum:
                 return False
-            minimum = root.val
-            root = root.right
-        return True
+            return _helper(node.left, minimum, node.val) and _helper(node.right, node.val, maximum)
+        return _helper(root, float('-inf'), float('inf'))
 # @lc code=end

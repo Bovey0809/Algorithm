@@ -7,17 +7,19 @@
 
 class Solution:
     def compress(self, chars) -> int:
-        anchor = write = 0
-        for read, char in enumerate(chars):
-            if read == len(chars) - 1 or chars[read] != chars[read + 1]:
-                chars[write] = chars[anchor]
-                write += 1
-                count = read - anchor + 1
-                if count > 1:
-                    for digit in str(count):
-                        chars[write] = digit
-                        write += 1
-                anchor = read + 1
+        read = anchor = write = 0
+        while read < len(chars):
+            while read < len(chars)-1 and chars[read] == chars[read + 1]:
+                read += 1
+            chars[write] = chars[anchor]
+            write += 1
+            count = read - anchor + 1
+            if count > 1:
+                for digit in str(count):
+                    chars[write] = digit
+                    write += 1
+            anchor = read + 1
+            read += 1
         return write
 # @lc code=end
 
