@@ -18,29 +18,27 @@ from queue import Queue
 
 class Solution:
     def levelOrder(self, root):
-        if not root:
-            return []
-        q = Queue()
-        q.put(root)
-        count, nextCount = 1, 0
+        deque = [root]
         result = []
-        level = []
-        while not q.empty():
-            node = q.get()
-            count -= 1
-            level.append(node.val)
-            if node.left:
-                q.put(node.left)
-                nextCount += 1
-            if node.right:
-                q.put(node.right)
-                nextCount += 1
-            if count == 0:
-                result.append(level)
-                count, nextCount = nextCount, count
-                level = []
+        levelcount = 1
+        nextLevelCount = 0
+        levelNodes = []
+        while deque and root:
+            root = deque.pop(0)
+            levelcount -= 1
+            levelNodes.append(root.val)
+            if root.left:
+                deque.append(root.left)
+                nextLevelCount += 1
+            if root.right:
+                deque.append(root.right)
+                nextLevelCount += 1
+            if levelcount == 0:
+                result.append(levelNodes)
+                levelcount = nextLevelCount
+                nextLevelCount = 0
+                levelNodes = []
         return result
-
 # @lc code=end
 
 

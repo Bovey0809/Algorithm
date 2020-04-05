@@ -2,17 +2,17 @@
 # [387] First Unique Character in a String
 # @lc code=start
 
-import collections
+
 from collections import Counter
 class Solution:
     def firstUniqChar(self, s: str) -> int:
-        c = Counter(s)                
-        for index, char in enumerate(s):
-            if c[char] == 1:
-                return index
+        counter = Counter(s)
+        for key in counter:
+            if counter[key] == 1:
+                return s.index(key)
         return -1
 # @lc code=end
 
 my = Solution()
-print(my.firstUniqChar("leetcodel"))
+print(my.firstUniqChar("leetcode"))
 print(my.firstUniqChar("loveleetcode"))

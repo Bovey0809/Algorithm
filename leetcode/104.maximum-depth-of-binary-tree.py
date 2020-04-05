@@ -18,7 +18,6 @@ class Solution:
         # base case
         if not root:
             return 0
-        else:
-            return max(self.maxDepth(root.left), self.maxDepth(root.right)) + 1
-
+        return 1 + max(self.maxDepth(root.left), self.maxDepth(root.right))
+    
 # @lc code=end

@@ -9,16 +9,19 @@
 from bisect import bisect
 class Solution:
     def nextGreatestLetter(self, letters, target: str) -> str:
-        # use binary search
         left, right = 0, len(letters)
+        
         while left < right:
-            mid = (left + right) // 2
-            midvalue = letters[mid]
-            if midvalue <= target:
-                left = mid + 1
-            if midvalue > target:
-                right = mid
+            middle = (left + right) // 2
+            midvalue = letters[middle]
+            if target == midvalue:
+                left = middle + 1
+            if target < midvalue:
+                right = middle
+            if target > midvalue:
+                left = middle + 1        
         return letters[right % len(letters)]
+
 # @lc code=end
 
 

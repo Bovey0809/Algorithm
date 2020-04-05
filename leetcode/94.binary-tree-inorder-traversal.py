@@ -15,16 +15,14 @@
 
 class Solution:
     def inorderTraversal(self, root):
-        # Inoder traversal iteration using one stack.
-        # The root value here is like a pointer.
-        stack = []
+        s = []
         result = []
-        while stack or root:
+        while s or root:
             while root:
-                stack.append(root)
+                s.append(root)
                 root = root.left
-            root = stack.pop()
-            result.append(root.val)
+            root = s.pop()
+            result.append(root.val)            
             root = root.right
         return result
 # @lc code=end

@@ -16,9 +16,7 @@ class Solution:
     def sumOfLeftLeaves(self, root: TreeNode) -> int:
         if not root:
             return 0
-        if root.left and not root.left.left and not root.left.right:
+        if root.left and not root.left.right and not root.left.left:
             return root.left.val + self.sumOfLeftLeaves(root.right)
-        return self.sumOfLeftLeaves(root.left)
-        
+        return self.sumOfLeftLeaves(root.right) + self.sumOfLeftLeaves(root.left)
 # @lc code=end
-

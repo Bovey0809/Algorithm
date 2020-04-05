@@ -6,20 +6,27 @@
 
 # @lc code=start
 # Definition for a binary tree node.
-# class TreeNode:
-#     def __init__(self, x):
-#         self.val = x
-#         self.left = None
-#         self.right = None
+class TreeNode:
+    def __init__(self, x):
+        self.val = x
+        self.left = None
+        self.right = None
 
 
 class Solution:
     def isValidBST(self, root) -> bool:
-        def _helper(node, minimum, maximum):
-            if not node:
+        def _helper(root, low, high):
+            if not root:
                 return True
-            if not minimum < node.val < maximum:
-                return False
-            return _helper(node.left, minimum, node.val) and _helper(node.right, node.val, maximum)
+            if low < root.val < high:
+                return _helper(root.left, low, root.val) and _helper(root.right, root.val, high)
+            return False
         return _helper(root, float('-inf'), float('inf'))
 # @lc code=end
+
+
+root = TreeNode(1)
+root.left = TreeNode(2)
+root.right = TreeNode(3)
+my = Solution()
+print(my.isValidBST(root))

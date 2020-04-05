@@ -5,20 +5,17 @@
 
 class Solution:
     def reverseWords(self, s: str) -> str:
-        anchor = read = 0
-        space = " "
         words = []
+        read = 0
         while read < len(s):
-            if s[read] != space:
+            if s[read] != " ":
                 anchor = read
-                while read < len(s) and s[read] != space:
-                    print(read)
+                while read < len(s) and s[read] != " " :
                     read += 1
-                word = s[anchor:read]
-                words.append(word)
+                words.append(s[anchor:read])
             else:
                 read += 1
-        return space.join(words[::-1])
+        return ' '.join(words[::-1])
 # @lc code=end
 my = Solution()
 print(my.reverseWords("the sky is blue"))
