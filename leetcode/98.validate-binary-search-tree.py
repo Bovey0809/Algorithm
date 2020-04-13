@@ -15,13 +15,22 @@ class TreeNode:
 
 class Solution:
     def isValidBST(self, root) -> bool:
-        def _helper(root, low, high):
-            if not root:
-                return True
-            if low < root.val < high:
-                return _helper(root.left, low, root.val) and _helper(root.right, root.val, high)
-            return False
-        return _helper(root, float('-inf'), float('inf'))
+        # use inorder
+        if not root:
+            return True
+        minimum = float('-inf')
+        stack = []
+        while stack or root:
+            while root:
+                stack.append(root)
+                root = root.left
+            root = stack.pop()
+            if not root.val > minimum:
+                return False
+            else:
+                minimum = root.val
+            root = root.right
+        return True
 # @lc code=end
 
 

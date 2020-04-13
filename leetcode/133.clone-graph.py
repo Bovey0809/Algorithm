@@ -16,23 +16,20 @@ class Node:
 
 class Solution:
     def cloneGraph(self, node):
-        # Recusive Iteration
-        if not node: return
-        copy_node = Node(node.val)
-        visited = {node: copy_node}
-        stack = [node]
-        while stack:
-            node = stack.pop()
+        def dfs(node, visited):
+            copy_node = Node(node.val)
+            visited[node]= copy_node
             for neighbor in node.neighbors:
-                if neighbor not in visited:
+                if neighbor in visited:
+                    copy_node.neighbors.append(visited[neighbor])
+                else:
                     copy_neighbor = Node(neighbor.val)
                     visited[neighbor] = copy_neighbor
-                    visited[node].neighbors.append(copy_neighbor)
-                    stack.append(neighbor)
-                else:
-                    visited[node].neighbors.append(visited[neighbor])
-        return copy_node
-
+                    copy_node.neighbors.append(dfs(neighbor, visited))
+            return copy_node
+        if not node:
+            return None
+        return dfs(node, {})
 class Node:
     def __init__(self, val = 0, neighbors = []):
         self.val = val

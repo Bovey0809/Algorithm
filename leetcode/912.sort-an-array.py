@@ -12,15 +12,16 @@ import random
 
 class Solution:
     def sortArray(self, nums):
-        # quick sort
-        def partition(nums, low, high):
-            temp = nums[high]
-            j = low - 1 
-            for i in range(low, high):
-                while nums[i] < temp:
-                    j += 1
-                    nums[i], nums[j] = nums[j], nums[i]
-                
+        # insertion sort
+        lengh = len(nums)
+        for i in range(lengh):
+            temp = nums[i]
+            j = i - 1
+            while j >= 0 and nums[j] > temp:
+                nums[j], nums[j+1] = nums[j+1], nums[j]
+                j -= 1
+        return nums
+    
 # @lc code=end
 
 

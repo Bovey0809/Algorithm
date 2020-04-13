@@ -11,18 +11,19 @@ class MyStack:
             
     def push(self, x: int) -> None:
         self.queue1.put(x)
-        self.peak = x
         self.size += 1
+        self.peak = x
 
     def pop(self) -> int:
         for _ in range(self.size - 1):
-            self.peak = self.queue1.get()
-            self.queue2.put(self.peak)
-        self.size -= 1
-        popitem = self.queue1.get()
+            x = self.queue1.get()
+            self.peak = x
+            self.queue2.put(x)
+        x = self.queue1.get()
         self.queue1 = self.queue2
-        return popitem
-    
+        self.size -= 1
+        return x
+
     def top(self) -> int:
         return self.peak
 

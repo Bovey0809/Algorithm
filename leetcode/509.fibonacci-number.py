@@ -12,9 +12,10 @@ class Solution:
         # Dynamic 28ms
         left, right = 0, 1
         for _ in range(N):
-            left, right = right, left + right
+            temp = left + right
+            left, right = right, temp
         return left
 # @lc code=end
 
 me = Solution()
-print(me.fib(0))
+print(me.fib(4))
