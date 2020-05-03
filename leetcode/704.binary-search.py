@@ -12,12 +12,11 @@ class Solution:
         left, right = 0, len(nums) - 1
         while left <= right:
             mid = (left + right) // 2
-            midvalue = nums[mid]
-            if midvalue == target:
+            if nums[mid] == target:
                 return mid
-            elif midvalue < target:
+            if nums[mid] < target:
                 left = mid + 1
-            elif midvalue > target:
+            if nums[mid] > target:
                 right = mid - 1
         return -1
 # @lc code=end

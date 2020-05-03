@@ -8,11 +8,12 @@ class Solution:
         words = []
         read = 0
         while read < len(s):
-            if s[read] != " ":
+            if s[read] != ' ':
                 anchor = read
-                while read < len(s) and s[read] != " " :
+                while read < len(s) and s[read] != " ":
                     read += 1
-                words.append(s[anchor:read])
+                word = s[anchor:read]
+                words.append(word)
             else:
                 read += 1
         return ' '.join(words[::-1])

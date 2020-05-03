@@ -16,26 +16,20 @@ class Node:
 
 class Solution:
     def cloneGraph(self, node):
-        def dfs(node, visited):
-            copy_node = Node(node.val)
-            visited[node]= copy_node
-            for neighbor in node.neighbors:
-                if neighbor in visited:
-                    copy_node.neighbors.append(visited[neighbor])
-                else:
-                    copy_neighbor = Node(neighbor.val)
-                    visited[neighbor] = copy_neighbor
-                    copy_node.neighbors.append(dfs(neighbor, visited))
-            return copy_node
         if not node:
             return None
-        return dfs(node, {})
-class Node:
-    def __init__(self, val = 0, neighbors = []):
-        self.val = val
-        self.neighbors = neighbors
+        clone_graph = {node: Node(node.val)} # {node: clone_node}
+        def dfs(node):
+            for neighbor in node.neighbors:
+                if neighbor in clone_graph:
+                    clone_graph[node].neighbors.append(clone_graph[neighbor])
+                else:
+                    clone_neighbor = Node(neighbor.val)
+                    clone_graph[neighbor] = clone_neighbor
+                    clone_graph[node].neighbors.append(clone_neighbor)
+                    dfs(neighbor)
+                
+        dfs(node)
+        return clone_graph[node]
 
-one = Node(1)
-two = Node(2)
-three = Node(3)
-four = Node(4)
+# @lc code=end

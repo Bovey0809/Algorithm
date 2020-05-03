@@ -10,9 +10,17 @@
 class Solution:
     def removeDuplicates(self, nums) -> int:
         write = 0
-        for read in range(len(nums)):
-            if read == len(nums) - 1 or nums[read] != nums[read + 1]:
+        read = 0
+        seen = set()
+        while read < len(nums):
+            if nums[read] not in seen:
+                seen.add(nums[read])
                 nums[write] = nums[read]
                 write += 1
+                read += 1
+            else:
+                read += 1
         return write
+            
+            
 # @lc code=end

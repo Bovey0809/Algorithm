@@ -7,15 +7,15 @@
 # @lc code=start
 class Solution:
     def canVisitAllRooms(self, rooms: List[List[int]]) -> bool:
-        def dfs(key):
-            for room in rooms[key]:
-                if room in visited:
-                    continue
-                else:
-                    visited.append(room)
-                    dfs(room)        
-        visited = [0]
-        dfs(0)
-        return len(visited) == len(rooms)
+        rooms_status = [False] * len(rooms)
+        stack = [0]
+        while stack:
+            room = stack.pop()
+            rooms_status[room] = True
+            for key in rooms[room]:
+                if not rooms_status[key]:
+                    stack.append(key)
+        return all(rooms_status)
+
 # @lc code=end
 

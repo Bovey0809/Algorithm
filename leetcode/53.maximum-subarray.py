@@ -5,13 +5,12 @@
 
 class Solution:
     def maxSubArray(self, nums) -> int:
-        if not nums:
-            return 0
-        cur_max = global_max = nums[0]
-        for num in nums[1:]:
-            cur_max = max(num, cur_max + num)
-            global_max = max(global_max, cur_max)
-
+        global_min = float('-inf')
+        curmin = global_min
+        for num in nums:
+            curmin = max(num, curmin + num)
+            global_min = max(curmin, global_min)
+        return global_min
 
 # @lc code=end
 my = Solution()

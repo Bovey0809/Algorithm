@@ -4,15 +4,16 @@
 
 class Solution:
     def permute(self, nums: list) -> list:
-        # recursion
-        # base case
-        result = []
-        if len(nums) <= 1:
+        # Base Case
+        if len(nums) == 1:
             return [nums]
-        for index, num in enumerate(nums):
-            for perm in self.permute(nums[:index] + nums[index + 1:]):
-                result.append(perm + [num])
+        result = []
+        for num in nums:
+            index = nums.index(num)
+            for perm in self.permute(nums[:index] + nums[index + 1 :]):
+                result.append([num]+perm)
         return result
+
 # @lc code=end
 
 
