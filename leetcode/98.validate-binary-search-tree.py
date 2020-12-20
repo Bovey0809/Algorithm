@@ -14,18 +14,17 @@ class TreeNode:
 
 
 class Solution:
-    def isValidBST(self, root) -> bool:
-        # use inorder
+    def isValidBST(self, root:TreeNode) -> bool:
         if not root:
             return True
-        minimum = float('-inf')
         stack = []
+        minimum = float('-inf')
         while stack or root:
             while root:
                 stack.append(root)
                 root = root.left
             root = stack.pop()
-            if not root.val > minimum:
+            if root.val <= minimum:
                 return False
             else:
                 minimum = root.val

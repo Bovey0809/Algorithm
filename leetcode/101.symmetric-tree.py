@@ -15,24 +15,15 @@
 
 class Solution:
     def isSymmetric(self, root: TreeNode) -> bool:
+        def helper(left, right):
+            if not left and not right:
+                return True
+            if left and right:
+                if left.val == right.val:
+                    return helper(left.left, right.right) and helper(left.right, right.left)
+            return False
         if not root:
             return True
-        # using queue
-        queue = [root, root]
-        while queue:
-            point1 = queue.pop(0)
-            point2 = queue.pop(0)
-            if point1 and point2:
-                if point1.val != point2.val:
-                    return False
-                else:
-                    queue.extend([point1.left, point2.right])
-                    queue.extend([point1.right, point2.left])
-            elif not point2 and not point1:
-                continue
-            else:
-                return False
-        return True
-            
+        return helper(root.left, root.right)
 
 # @lc code=end

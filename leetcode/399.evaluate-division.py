@@ -8,26 +8,31 @@ from collections import defaultdict
 # @lc code=start
 class Solution:
     def calcEquation(self, equations: List[List[str]], values: List[float], queries: List[List[str]]) -> List[float]:
-        g = defaultdict(dict)        
+        g = defaultdict(dict)
         for (a, b), v in zip(equations, values):
             g[a][b] = v
-            g[b][a] = 1.0 / v
-        def dfs(s, d):
-            stack = [(s, 1.0)]
-            seen = set()
+            g[b][a] = 1/v
+            g[a][a] = 1
+            g[b][b] = 1
+        def dfs(start, destination, visited: set):
+            if start not in g or destination not in g:
+                return - 1.0
+                
+            stack = []
+            stack.append((start, 1.0))
+            
             while stack:
-                n, result = stack.pop()
-                seen.add(n)
-                for c in g[n]:
-                    if c == d:
-                        return result * g[n][c]
-                    if not c in seen:
-                        stack.append((c, result * g[n][c]))
-            return - 1.0
-        
-        return [dfs(s, d) for s, d in queries]
-# @lc code=end
-me = Solution()
-test_case = [[["x1", "x2"], ["x2", "x3"], ["x3", "x4"], ["x4", "x5"]], [3.0, 4.0, 5.0, 6.0], [["x2", "x2"]]]
+                cur, result = stack.pop()
+                if cur == destination:
+                    return result
+                
+                for c in g[cur]:
+                    if c in visited:
+                        continue
+                    visited.add(c)
+                    stack.append((c, result * g[cur][c]))
+            return - 1
+            
+        return [dfs(start, destination, set()) for start, destination in queries]
 
-print(me.calcEquation(*test_case))
+# @lc code=end
