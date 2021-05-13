@@ -1,24 +1,23 @@
 import numpy as np
 from numpy.core.fromnumeric import sort
+
 # find the kth element in the array.
 
 
-def fine_k_element(nums1, nums2, k):
+def find_k_element(nums1, nums2, k) -> float:
     # base case
+    if len(nums1) > len(nums2):
+        nums1, nums2 = nums2, nums1
     # empty
     if not nums1:
-        return nums1[-1]
-    if not nums2:
-        return nums2[-1]
-    # k // 2  is larger than the size of the array
-    if k // 2 > len(nums2) or k // 2 > len(nums1):
+        return nums2[k - 1]
+    # too large
+    t = min(k // 2, len(nums1))
+
+    if nums1[t-1] < nums2[t-1]:
+        return find_k_element(nums1[t:], nums2, k-t)
+    else:
+        return find_k_element(nums1, nums2[t:], k-t)
 
 
-numbers = [i for i in range(25)]
-
-nums1 = np.random.choice(numbers, 10)
-nums2 = np.random.choice(numbers, 5)
-
-nums2 = sort(nums2)
-nums1 = sort(nums1)
-print(nums1, nums2)
+print(find_k_element(nums1=[1, 2, 8, 9, 10], nums2=[3, 5, 7], k=6))
